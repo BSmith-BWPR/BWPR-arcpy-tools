@@ -5,15 +5,9 @@ Version History
     1.0 (7/2/21)        Added tool
     1.1 (5/2/22)        Modified to be able to populate date fields
     
-NOTES - this tool is slow, probably because of the "messages" and "updateparams" constantly opening excel tables behind the scenes
-revisit this and only open a file on the validated check.
+    UPDATE - This tool has been deprecated.  See Join Field Overwrite for an improved version. Only keeping this up because it
+             does let you read Excel files directly, and Join Field Overwrite only works with table views / feature classes in the TOC.
 
-Since get parameter info only gets called once, we can define an empty global variable there
-then on a hasbeenvalidated call, we can populate that global variable.
-
-Overhaul idea - change parameters to named dictionary, then fix all the validation to only run when not .hasBeenValidated
-
-Also need to check field types for the key field. STORMID for example is string in ESRI but int in EXCEL
 '''
 
 import arcpy
