@@ -6,6 +6,9 @@ But it can be used as an Excel style VLOOKUP to populate an existing field
 
 Version History
     1.0 (11/2/2022)        Script created.
+    
+    
+NOTE! REVISION NEEDED!  When comparing field names, it needs to be case insensitive. For example, if adding as fieldA, it needs to see if we already have FIELDA.
 
 '''
 
@@ -253,9 +256,11 @@ class JoinFieldOverwrite(object):
                     if overwrite in ['Clear all existing values','Overwrite existing values'] or row[1] is None or str(row[1]).strip()=='':
                         if row[0] in d_lookup.keys():
                             if row[1] != d_lookup[row[0]]:
-                                messages.AddMessage('---Row {} set to value {}'.format(row[0],d_lookup[row[0]]))
-                                row[1] = d_lookup[row[0]]
-                                cursor.updateRow(row)
+                                # add a second check to make sure both fields aren't blank
+                                if row[1] or d_lookup[row[0]]:
+                                    messages.AddMessage('---Row {} set to value {}'.format(row[0],d_lookup[row[0]]))
+                                    row[1] = d_lookup[row[0]]
+                                    cursor.updateRow(row)
         
         # define field mapping for new fields to add (since user has ability to rename the joined fields)
         fms = arcpy.FieldMappings()
